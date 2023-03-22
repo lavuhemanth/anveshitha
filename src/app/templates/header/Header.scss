@@ -1,0 +1,31 @@
+#header {
+    .link {
+        font-weight: 600 !important;
+        border-bottom: 2px solid #133259;
+        letter-spacing: 1px;
+        font-size: 18px !important;
+        text-decoration: none;
+        transition: border-bottom 0.9s;
+        transition: color 0.4s;
+        border-right: 2px solid white;
+        padding-right: 25px;
+        padding-left: 25px;
+    }
+    .link:last-child {
+        border-right: 0px;
+    }
+    .link:hover {
+        color: red !important;
+        border-bottom: 2px solid red;
+    }
+
+    .link:active {
+        color: red !important;
+        border-bottom: 2px solid red;
+    }
+    @media only screen and (max-width: 766px) {
+    .link {
+    border-right: 0px;
+    }
+    }
+}

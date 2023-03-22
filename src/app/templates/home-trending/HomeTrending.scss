@@ -1,0 +1,44 @@
+.sec-trending {
+  color: white;
+  .sec-trending-content {
+    background-color: brown;
+    width: 99%;
+    margin-left: 5px;
+  }
+}
+.sec-cartoon {
+  color: white;
+  background-color: lightgreen;
+ 
+}
+
+.img-container:hover {
+    box-shadow: 2px 0px 2px 0px #d77b7b;
+}
+
+.image-container {
+      width: 100%;
+    border: 2px solid white;
+    height: 456px;
+    position: relative;
+    img {
+      width: 100%;
+    }
+    .bottom-text {
+        position: absolute;
+        bottom: 0px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+  .mb-30x {
+    margin-bottom: 30px;
+  }
+  .mb-160x {
+    margin-bottom: 80px;
+  }
+  .sec-trending .sec-trending-content {
+    width: 100%;
+    margin-left: 0px;
+  }
+}

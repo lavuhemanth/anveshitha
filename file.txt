@@ -1,0 +1,59 @@
+Context API is a feature in React that allows components to share data without the need to pass props through each level of the component tree. It provides a way to share data across components, even if those components are not directly related.
+
+Here's an example of how to use Context API in React:
+
+Create a context object:
+javascript
+Copy code
+import { createContext } from 'react';
+
+const MyContext = createContext();
+export default MyContext;
+Wrap the components that need access to the context with the MyContext.Provider component:
+javascript
+Copy code
+import MyContext from './MyContext';
+
+function App() {
+  return (
+    <MyContext.Provider value={{ username: 'JohnDoe' }}>
+      <Header />
+      <Main />
+      <Footer />
+    </MyContext.Provider>
+  );
+}
+Access the context data in the child components using the MyContext.Consumer component:
+javascript
+Copy code
+import MyContext from './MyContext';
+
+function Header() {
+  return (
+    <MyContext.Consumer>
+      {context => (
+        <header>
+          <h1>Welcome, {context.username}!</h1>
+        </header>
+      )}
+    </MyContext.Consumer>
+  );
+}
+In this example, the MyContext.Provider component wraps the Header, Main, and Footer components and provides a value of { username: 'JohnDoe' }. The Header component uses the MyContext.Consumer component to access the username value and display a welcome message.
+
+Note that you can also use the useContext hook instead of MyContext.Consumer in functional components to access the context data:
+
+javascript
+Copy code
+import { useContext } from 'react';
+import MyContext from './MyContext';
+
+function Header() {
+  const context = useContext(MyContext);
+  return (
+    <header>
+      <h1>Welcome, {context.username}!</h1>
+    </header>
+  );
+}
+This example achieves the same result as the previous one, but it uses the useContext hook to access the context data in a simpler way.

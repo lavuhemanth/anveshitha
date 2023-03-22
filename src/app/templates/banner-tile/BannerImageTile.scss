@@ -1,0 +1,31 @@
+.container-bg {
+    background-color: beige;
+    padding: 15px;
+    .banner-title {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid #eee;
+        .banner-tile-context {
+               position: absolute;
+            background-color: rgb(0 0 0 / 53%);
+            color: white;
+            padding: 5px;
+            font-size: 20px;
+            top: 15px;
+            letter-spacing: 0.9px;
+            border-radius: 0px 0px 30px 0px;
+            width: 50%;
+            border-bottom: 4px solid #e70909;
+        }
+        .banner-headline-context {
+            position: absolute;
+            bottom: 0px;
+            padding: 5px;
+            width: 100%;
+            font-weight: 600;
+            color: white;
+            background-color: rgb(0 0 0 / 53%);
+            letter-spacing: 1px;
+        }
+    }
+}
