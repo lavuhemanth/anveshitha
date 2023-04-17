@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import { Swiper } from 'swiper/react';
 import "swiper/css";
@@ -5,8 +6,6 @@ import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import { FreeMode, Pagination } from "swiper";
 import { SwiperSlide } from 'swiper/react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import newsData from "../../../assets/data";
 var screen = Screen;

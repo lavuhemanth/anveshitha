@@ -1,34 +1,39 @@
+import React from "react";
 import { Button, Table } from "react-bootstrap";
+// import TableWithDragAndDrop from "../sort-data/TableWithDragAndDrop";
 
 
 function ContextViewer({ list, onEdit, onDelete }) {
     if (!list.length) return ('');
-    return (
+  return (
+    <>
       <Table striped bordered hover>
         <thead>
           <tr>
             <th>#</th>
             <th colSpan={2}>Subject</th>
-
-            <th colSpan={1} className="w-100x">Actions</th>
+            <th className="w-100x">Actions</th>
           </tr>
         </thead>
         <tbody>
           {list &&
             list.map((item, i) => (
-              <tr key={item?.id}>
+              <tr key={i}>
                 <td>{i + 1}</td>
-                <td colSpan={2}>{item?.subject}</td>
+                <td colSpan={2}>
+                  <h3>{item?.title}</h3>
+                  <p>{item?.subject}</p>
+                </td>
                 <td>
                   <Button
                     className="btn btn-primary mx-3"
-                    onClick={(e) => onEdit(e, i)}
+                    onClick={() => onEdit(i)}
                   >
                     Edit
                   </Button>
                   <Button
                     className="btn btn-primary"
-                    onClick={(e) => onDelete(e, i)}
+                    onClick={() => onDelete(i)}
                   >
                     Delete
                   </Button>
@@ -37,7 +42,10 @@ function ContextViewer({ list, onEdit, onDelete }) {
             ))}
         </tbody>
       </Table>
-    );
+
+      {/* <TableWithDragAndDrop data={list} /> */}
+    </>
+  );
 }
 
 export default ContextViewer;

@@ -1,6 +1,6 @@
 import Cropper from "react-easy-crop";
-import { useState, useImperativeHandle, forwardRef } from "react";
-import { useCallback } from 'react';
+import React, { useState, useImperativeHandle, forwardRef, useCallback } from "react";
+
 import { getCroppedImg } from "./canvasUtils";
 
 const NewImageCropper = forwardRef(({ yourImage, aspectRatio, setImageSrc }, ref) => {
@@ -16,12 +16,12 @@ const NewImageCropper = forwardRef(({ yourImage, aspectRatio, setImageSrc }, ref
   const showCroppedImage = useCallback(async () => {
     try {
       const croppdImage = await getCroppedImg(yourImage, croppedAreaPixels);
-      setCroppedImage(croppdImage);
+      // setCroppedImage(croppdImage);
       setImageSrc(croppdImage);
     } catch (e) {
       console.error(e);
     }
-  }, [yourImage, croppedImage, setImageSrc, croppedAreaPixels]);
+  }, [yourImage, setImageSrc, croppedAreaPixels]);
 
   useImperativeHandle(ref, () => ({
     cropped() {
@@ -68,7 +68,7 @@ const NewImageCropper = forwardRef(({ yourImage, aspectRatio, setImageSrc }, ref
       >
         Crop
       </Button> */}
-      {/* <img src={croppedImage} alt={"crop"} /> */}
+      <img src={croppedImage} alt={"crop"} />
     </div>
   );
 });

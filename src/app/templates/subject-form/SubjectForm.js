@@ -1,9 +1,18 @@
+import React, { useEffect, useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
-import React, { useState } from "react";
 
-const SubjectForm = ({addToSubject, index = 0, btn}) => {
+const SubjectForm = ({ addToSubject, subjectData, btn }) => {
   const [title, setTitle] = useState("");
   const [subject, setSubject] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (subjectData) {
+      setTitle(subjectData?.title);
+      setSubject(subjectData?.subject);
+    }
+  }, [subjectData]);
+
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
@@ -12,10 +21,17 @@ const SubjectForm = ({addToSubject, index = 0, btn}) => {
     setSubject(event.target.value);
   };
 
+  const handleSubmit = () => {
+    if (!subject || subject.length === 0) {
+      setError('Description is required');
+    }
+    addToSubject({ title, subject });
+  }
+
   return (
     <Container>
-      <Form.Group controlId="title">
-        <Form.Label>Title</Form.Label>
+      <Form.Group controlId="title" className="my-2">
+        <Form.Label className="my-2">Title</Form.Label>
         <Form.Control
           size="lg"
           type="text"
@@ -25,18 +41,24 @@ const SubjectForm = ({addToSubject, index = 0, btn}) => {
         />
       </Form.Group>
 
-      <Form.Group controlId="description">
-        <Form.Label>Subject</Form.Label>
+      <Form.Group controlId="description" className="my-2">
+        <Form.Label className="my-2">Subject</Form.Label>
         <Form.Control
+          as="textarea"
+          rows={3}
           size="lg"
           type="text"
           value={subject}
           onChange={handleSubjectChange}
-          placeholder="Enter title"
+          placeholder="Enter Context"
         />
       </Form.Group>
+      <span className="color-red">{error && error}</span>
+      {}
 
-      <Button onClick={() => addToSubject({ title, subject })}>{btn}</Button>
+      <Button className="mt-1 p-2 w-100" onClick={handleSubmit}>
+        {btn}
+      </Button>
     </Container>
   );
 };
