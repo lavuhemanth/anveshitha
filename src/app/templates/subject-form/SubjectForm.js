@@ -22,8 +22,9 @@ const SubjectForm = ({ addToSubject, subjectData, btn }) => {
   };
 
   const handleSubmit = () => {
-    if (!subject || subject.length === 0) {
-      setError('Description is required');
+    if (subject.length === 0 || subject.length <=  10) {
+      setError("Description is required. Minimum 10 letters");
+      return;
     }
     addToSubject({ title, subject });
   }
@@ -45,11 +46,12 @@ const SubjectForm = ({ addToSubject, subjectData, btn }) => {
         <Form.Label className="my-2">Subject</Form.Label>
         <Form.Control
           as="textarea"
-          rows={3}
+          rows={8}
           size="lg"
           type="text"
           value={subject}
           onChange={handleSubjectChange}
+          required
           placeholder="Enter Context"
         />
       </Form.Group>
