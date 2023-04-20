@@ -10,13 +10,13 @@ import DatePicker from 'react-datepicker';
 
 function CreateFrom({onSubmit, newsData}) {
   // Form fields Start
-  const [title, setTitle] = useState(" ");
-  const [headLine, setHeadLine] = useState(" ");
-  const [subHeadline, setSubHeadline] = useState(" ");
+  const [title, setTitle] = useState("title onw");
+  const [headLine, setHeadLine] = useState("head line one");
+  const [subHeadline, setSubHeadline] = useState("sub head line one");
   const [category, setCategory] = useState("sports");
-  const [imgDesc, setImgDesc] = useState(" ");
-  const [reportedBy, setReportedBy] = useState(" ");
-  const [isPublic, setIsPublic] = useState(false);
+  const [imgDesc, setImgDesc] = useState("img desc");
+  const [reportedBy, setReportedBy] = useState("reporter one");
+  const [isPublic, setIsPublic] = useState('0');
   const [publishDate, setPublishDate] = useState(new Date());
   const [tags, setTags] = useState([]);
   const options = [
@@ -39,12 +39,16 @@ function CreateFrom({onSubmit, newsData}) {
   ]; 
 
   const [address, setAddress] = useState({
-    city: "",
-    district: "",
-    state: ""
+    city: "city ",
+    district: "distric",
+    state: "state"
   });
 
-    const [subjectList, setSubjectList] = useState([]);
+    const [subjectList, setSubjectList] = useState([
+      { title: "My text ", subject: "this is a lengthy subject" },
+      { title: "My text one", subject: "this is a lengthy subject one" },
+      { title: "My text two", subject: "this is a lengthy subject two" },
+    ]);
     const [subjectObj, setSubjectObj] = useState(null);
   // Form fields end
 
@@ -58,7 +62,7 @@ function CreateFrom({onSubmit, newsData}) {
   const handleHeadLineChange = (event) => setHeadLine(event.target.value);
   const handleSubHeadLineChange = (event) => setSubHeadline(event.target.value);
   const handleCategoryChange = (event) => setCategory(event.target.value);
-  const handlePublicPrivateChange = (event) => setIsPublic(event.target.value);
+  const handlePublicPrivateChange = (event) => setIsPublic(event.target.value === '0' ? '0' : '1');
   const handleDatePicker = (date) => setPublishDate(date);
 
   const handleAddressCityChange = (event) => {  
@@ -286,7 +290,7 @@ function CreateFrom({onSubmit, newsData}) {
                 <Form.Check
                   size="sm"
                   type="radio"
-                  value={false}
+                  value="1"
                   name="isPublic"
                   onChange={handlePublicPrivateChange}
                 />
@@ -298,7 +302,7 @@ function CreateFrom({onSubmit, newsData}) {
                 <Form.Check
                   size="sm"
                   type="radio"
-                  value={false}
+                  value="0"
                   name="isPublic"
                   onChange={handlePublicPrivateChange}
                 />

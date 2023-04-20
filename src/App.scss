@@ -9,6 +9,10 @@ $color-white: white;
 $color-electric-blue: #2196F3;
 $color-liteDark-blue: #1B477E;
 
+body {
+  position: relative;
+}
+
 // set-tow
 
 .bg {
@@ -104,7 +108,13 @@ box-shadow: none !important;
   padding: 10px;
 }
 
-footer p , footer li{
+
+.footer {
+  position: relative;
+  bottom: 0px;
+  top: 10vh;
+}
+.footer p , .footer li{
   font-weight: 300;
   color: white;
 }
@@ -143,4 +153,8 @@ footer p , footer li{
 .swiper-button-next:hover, .swiper-button-prev:hover {
   color: red;
   background-color: #eeeeeea0;
+}
+
+.align-right {
+  text-align: right;
 }

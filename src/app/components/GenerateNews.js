@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import CreateFrom from "../templates/create-form/CreateForm";
 import NewsData from "../templates/news-data/NewsData";
 
@@ -11,25 +11,26 @@ function GenerateNews() {
   const [selectedDataIndex, setSelectedDataIndex] = useState(null);
   const [selectedData, setSelectedData] = useState(null);
 
-  const handleCreateForm = () => setShow(true);
-
-  const handleNewsList = () => {
-
-    if (selectedDataIndex) {
-    }
+  const clsEdit = () => {
+    setSelectedData(null);
+    setSelectedDataIndex(null);
+    setShow(false);
   };
 
   const addToDescriptionList = (data) => {
-    if (selectedDataIndex && selectedDataIndex >= 0) {
+    console.log(
+      typeof selectedDataIndex,
+      selectedDataIndex , selectedDataIndex >= 0, ' COnditions'
+    );
+    if (selectedDataIndex !== null && Number(selectedDataIndex) >= 0) {
       const newList = newsList;
       newList[selectedDataIndex] = data;
-      setSelectedData(null);
-      setSelectedDataIndex(null);
       setNewsList(newList);
     } else {
       setNewsList([...newsList, data]);
     }
-    setShow(false);
+    clsEdit();
+    console.log(newsList);
   };
 
   const onEditSubject = (indx) => {
@@ -47,26 +48,34 @@ function GenerateNews() {
 
  
   return (
-    <>
-      <div>
-        <h1>News Data</h1>
-        <Button onClick={handleCreateForm}>Add News</Button>
-      </div>
+    <div>
+      <Row className="mb-2">
+        <Col>
+          <h1>News Data</h1>
+        </Col>
+        <Col className="align-right">
+          {!show && <Button onClick={() => setShow(true)}>Add News</Button>}
+          {show && <Button onClick={() => clsEdit()}>close News</Button>}
+        </Col>
+      </Row>
 
-      {show && (
-        <>
-          <Button onClick={handleCreateForm}>close News</Button>
+      <Row className="mb-2">
+        {show && (
           <CreateFrom onSubmit={addToDescriptionList} newsData={selectedData} />
-        </>
-      )}
-      {!show && newsList.length > 0 && (
-        <NewsData
-          onSubmit={handleNewsList}
-          onDelete={deleteSubject}
-          onEdit={onEditSubject}
-        />
-      )}
-    </>
+        )}
+        {!show && newsList.length > 0 && (
+          <NewsData
+            list={newsList}
+            onDelete={deleteSubject}
+            onEdit={onEditSubject}
+          />
+        )}
+
+        {!show && newsList.length === 0 && (
+          <h1 className="text-center m-5 p-5">No Data found</h1>
+        )}
+      </Row>
+    </div>
   );
 }
 
