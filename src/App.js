@@ -10,6 +10,7 @@ import Footer from './app/components/Footer';
 import GenerateNews from './app/components/GenerateNews';
 import HomeContent from './app/templates/home-content/HomeContent';
 import StateNews from './app/components/StateNews';
+import HomeManagement from './app/components/HomeManagement';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               element={<HomeContent />}
             />
             <Route exact path="/news/:category" element={<StateNews />} />
+            <Route exact path='/home-management' element={<HomeManagement/>}/>
           </Routes>
         </Router>
       </Container>
