@@ -20,10 +20,12 @@ function App() {
         <Router basename="/">
           <Routes>
             <Route exact path="/" element={<Home />} />
+            {/* Not in use from */}
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/admin-board" element={<DashBoard />} />
             <Route exact path="/create-news" element={<GenerateNews />} />
             <Route exact path="/update/:id" element={<GenerateNews />} />
+            {/* Not in use end*/}
             <Route
               exact
               path="/content/:category/:slug"
