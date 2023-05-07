@@ -28,8 +28,8 @@ function HomeTrending() {
     }, []);
 
     return (
-      <Container fluid className="mb-160x" onResize={() => screenResize()}>
-        <Row className="my-3 py-2 ">
+      <Container fluid className="mb-160x HomeTredSec" onResize={() => screenResize()}>
+        <Row className="my-3">
           <Col md={3} className="p-3 sec-cartoon mb-30x">
             <Tabs
               defaultActiveKey="home"
@@ -60,7 +60,7 @@ function HomeTrending() {
             </Tabs>
           </Col>
           <Col md={9} className="sec-trending mb-160x">
-            <div className="p-3 sec-trending-content">
+            <div className="py-5 px-3 sec-trending-content">
               <h2 className="text-center p-2">ట్రెండింగ్ అప్‌డేట్‌లు</h2>
               <div>
                 <Swiper

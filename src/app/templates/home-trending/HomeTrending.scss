@@ -1,7 +1,13 @@
+.HomeTredSec{
+  background-color: #ffffff;
+  box-shadow: 0px 0px 35px rgb(0 0 0 / 15%);
+  border-radius: 10px;
+  // padding: 10px 0px;
+}
 .sec-trending {
   color: white;
   .sec-trending-content {
-    background-color: brown;
+    background-color: #ffffff;
     width: 99%;
     margin-left: 5px;
   }
@@ -9,20 +15,21 @@
 .sec-cartoon {
   color: white;
   background-color: lightgreen;
- 
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
-
-.img-container:hover {
-    box-shadow: 2px 0px 2px 0px #d77b7b;
-}
+// .img-container:hover {
+//     box-shadow: 2px 0px 2px 0px #d77b7b;
+// }
 
 .image-container {
-      width: 100%;
+    width: 100%;
     border: 2px solid white;
     height: 456px;
     position: relative;
     img {
       width: 100%;
+      height: 320px;
     }
     .bottom-text {
         position: absolute;

@@ -21,7 +21,7 @@ export default function VerTabs() {
               <img src={apSpecial?.img_url} width="100%" className="" alt="" />
               <h4 className="pt-3">{apSpecial?.headline_subject}</h4>
               <div className="text-end">
-              <button className="knowMoreBtn">ఇంకా </button>
+              <a href="#" className="knowMoreBtn">ఇంకా </a>
               </div>
             </div>
           </div>
@@ -32,7 +32,7 @@ export default function VerTabs() {
               <img src={tnSpecial?.img_url} width="100%" className="" alt="" />
               <h4 className="pt-3">{tnSpecial?.headline_subject}</h4>
               <div className="text-end">
-              <button className="knowMoreBtn">ఇంకా </button>
+              <a href="#" className="">ఇంకా </a>
               </div>
             </div>
           </div>

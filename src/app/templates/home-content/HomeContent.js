@@ -34,7 +34,7 @@ function HomeContent({ categoryNews }) {
   };
 
   return (
-    <Container className="my-3 text-format home-content">
+    <Container className=" text-format home-content commonFirstSec">
       <div className="d-none d-md-block">
         <Row>
           <Col md={8}>
@@ -44,7 +44,7 @@ function HomeContent({ categoryNews }) {
                 <img src={selectedContent?.img_url} width="100%" alt="banner" />
               </Col>
             </Row>
-            <Row>
+            <Row className="pt-3">
               <Col md={12}>
                 {selectedContent?.subjectsList?.map((subject, i) => (
                   <>

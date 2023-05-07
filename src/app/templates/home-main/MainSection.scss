@@ -13,8 +13,14 @@ hr {
 
 ul {
   list-style: none;
+  
 }
 
+Ul{
+  a{
+    text-decoration: none !important;
+  }
+}
 .UL .li::before {
   content: "\2022";
   color: red;

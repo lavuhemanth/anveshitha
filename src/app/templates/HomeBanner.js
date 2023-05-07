@@ -23,9 +23,10 @@ function HomeBanner() {
   
   return (
     <>
-      <Container fluid className="container-bg">
+      <Container fluid className="container-bg commonFirstSec HomeBanSec py-5 px-3">
         <Row className="d-none d-md-block">
-          <Col>
+          <h2>Add A Small Heading Hear</h2>
+          <Col className="pt-3">
             <Swiper
               speed="400"
               spaceBetween={30}

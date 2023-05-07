@@ -19,12 +19,12 @@ const MainSection = () => {
   }, [mainData]);
 
   return (
-    <div className="container">
+    <div className="container p-0">
       <div className="card Maincard border-0 pt-2">
         <div className="container">
           <div className="row">
             <div className="col-8 left_col">
-              <h4>ప్రధాన వార్తలు</h4>
+              <h2>ప్రధాన వార్తలు</h2>
               <hr />
               <div className="row">
                 <div className="col-6">
@@ -33,16 +33,16 @@ const MainSection = () => {
                       <div className="row">
                         <div className="col-12">
                           <img src={secOneMainData?.img_url} width="100%" alt="min-banner" />
-                          <h4>{secOneMainData?.headline_subject}</h4>
+                          <h4 className="pt-3">{secOneMainData?.headline_subject}</h4>
                         </div>
 
                         <div className="col-6 mt-5">
                           <img src={secTwoMainData?.img_url} width="100%" alt="min-banner" />
-                          <h6>{secTwoMainData?.headline_subject}</h6>
+                          <h6 className="pt-3">{secTwoMainData?.headline_subject}</h6>
                         </div>
                         <div className="col-6 mt-5">
                           <img src={secThreeMainData?.img_url} width="100%" alt="min-banner" />
-                          <h6>{secThreeMainData?.headline_subject}</h6>
+                          <h6 className="pt-3">{secThreeMainData?.headline_subject}</h6>
                         </div>
                       </div>
                     </div>
@@ -53,7 +53,7 @@ const MainSection = () => {
                     {
                       newsList?.length && newsList?.map(item => (
                         <li className="li">
-                          {item?.headline}
+                          <a href="">{item?.headline}</a>
                         </li>
                       ))
                     }
