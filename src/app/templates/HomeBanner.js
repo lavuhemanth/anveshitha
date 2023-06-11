@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 // import Carousel from "react-bootstrap/Carousel";
 import BannerImageTile from "./banner-tile/BannerImageTIle";
@@ -10,22 +10,27 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 // import required modules
-import { Autoplay, Navigation } from "swiper";
-import newsData from "../../assets/data";
+import { Navigation } from "swiper";
+import MyContext from "../../assets/MyContext";
 
 function HomeBanner() {
-  // const [index, setIndex] = useState(0);
+  const context = useContext(MyContext);
   const [bannerLists, setBannerLists] = useState([]);
+  const [newsData, setNewsData] = useState(context);
 
   useEffect(() => {
-    setBannerLists(newsData["banner"]);
-  }, [])
+    setNewsData(context);
+    if (newsData) {
+      setBannerLists(newsData["banner"]);
+    }
+    console.log(newsData, 'Banner');
+  }, [newsData, context])
   
   return (
     <>
       <Container fluid className="container-bg commonFirstSec HomeBanSec py-5 px-3">
         <Row className="d-none d-md-block">
-          <h2>Add A Small Heading Hear</h2>
+          <h2>రాజకీయం & జాతీయం</h2>
           <Col className="pt-3">
             <Swiper
               speed="400"
@@ -34,11 +39,7 @@ function HomeBanner() {
               navigation={true}
               pagination={{ clickable: true }}
               className="mySwiper"
-              autoplay={{
-                delay: 2000,
-                disableOnInteraction: false,
-              }}
-              modules={[Autoplay, Navigation]}
+              modules={[Navigation]}
             >
               {bannerLists.map((image) => (
                 <SwiperSlide key={image.id}>
@@ -56,7 +57,7 @@ function HomeBanner() {
         <Row className="d-block d-sm-block d-md-none">
           <Col>
             <Swiper
-              speed="400"
+              speed="600"
               spaceBetween={30}
               slidesPerView={1}
               navigation={true}

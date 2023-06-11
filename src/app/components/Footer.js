@@ -7,6 +7,7 @@ import Yt from "../../assets/logoicons/Png/yt.png";
 
 
 import Logo_IMAGE from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -14,49 +15,49 @@ const Footer = () => {
       <Container className="cl pt-5 pb-5" fluid>
         <div className="d-flex footer-container footer-justify-center footer-column">
           <div className="br-2px px-4">
-            <a href={`/news/homeContent`} className="cl link">
+            <Link to={`/news/political`} className="cl link">
               రాజకీయం
-            </a>
+            </Link>
           </div>
           <div className="br-2px px-4">
-            <a href={`/news/ap`} className="cl link">
+            <Link to={`/news/ap`} className="cl link">
               ఆంధ్రప్రదేశ్
-            </a>
+            </Link>
           </div>
           <div className="br-2px px-4">
-            <a href={`/news/tn`} className="cl link">
+            <Link to={`/news/tn`} className="cl link">
               తెలంగాణ
-            </a>
+            </Link>
           </div>
           <div className="br-2px px-4">
-            <a href={`/news/homeContent`} className="cl link">
+            <Link to={`/news/international`} className="cl link">
               జాతీయం
-            </a>
+            </Link>
           </div>
           <div className="br-2px px-4">
-            <a href={`/news/sprt`} className="cl link">
+            <Link to={`/news/sports`} className="cl link">
               క్రీడలు
-            </a>
+            </Link>
           </div>
           <div className="br-2px px-4">
-            <a href={`/news/ent`} className="cl link">
+            <Link to={`/news/entertainment`} className="cl link">
               చిత్ర
-            </a>
+            </Link>
           </div>
           <div className="br-2px px-4">
-            <a href={`/news/trending`} className="cl link">
+            <Link to={`/news/education`} className="cl link">
               విద్య
-            </a>
+            </Link>
           </div>
           <div className="br-2px px-4">
-            <a href={`/news/trending`} className="cl link">
+            <Link to={`/news/business`} className="cl link">
               బిజినెస్
-            </a>
+            </Link>
           </div>
           <div className="px-4">
-            <a href={`/news/trending`} className="cl link">
+            <Link to={`/news/trending`} className="cl link">
               ట్రెండింగ్
-            </a>
+            </Link>
           </div>
         </div>
         <hr></hr>

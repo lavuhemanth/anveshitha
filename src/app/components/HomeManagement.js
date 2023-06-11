@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button, Col, Container, Row } from "react-bootstrap";
 import DragableTable from "../templates/dragable-table/DragableTable";
@@ -6,6 +6,8 @@ import RightOffCanvas from "../templates/RIghtOffCanvas";
 import { IS_BOOLEAN } from "../../mapper";
 import InfiniteList from "../templates/multi-select-list/InfiniteList";
 import SearchNews from "../templates/search-news/SearchNews";
+import { environment as config } from "../../assets/config";
+import { ToastContainer, toast } from "react-toastify";
 
 
 
@@ -13,6 +15,34 @@ import SearchNews from "../templates/search-news/SearchNews";
 function HomeManagement() {
 
     const [showRightNav, setShowRightNav] = useState(IS_BOOLEAN['FALSE']);
+    const [globalData, setGlobalData] = useState({});
+
+    useEffect(() => {
+        fetch(`${config.api_url}/`, {
+            method: 'GET',
+            'Content-Type': 'application/json' 
+        })
+        .then(response => response.json())
+        .then(response => {
+            if (response.statusCode === 200) {
+
+                if (response && response.data) {
+                    const data = response.data;
+                    setGlobalData(data);
+                    toast.success(response.message);
+                } else {
+
+                    toast.info(response.message);
+                }
+            } else {
+                toast.warn(response.message)
+            }
+
+        })
+        .catch(error => {
+            toast.error(error.message);
+          });
+    }, [setGlobalData]);
 
     const onCloseRightNav = () => {
         // code goes here
@@ -51,6 +81,16 @@ function HomeManagement() {
       </Container>
         
         </Container>
+        <ToastContainer position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"/>
 
        </Container>
     );

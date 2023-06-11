@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-import newsData from "../../../assets/data";
+import { Link } from "react-router-dom";
+import MyContext from "../../../assets/MyContext";
 
 export default function VerTabs() {
   const [apSpecial, setApSpecial] = useState({});
   const [tnSpecial, setTnSpecial] = useState({});
+  const [newsData, setNewsData] = useState(null);
+  const context = useContext(MyContext);
 
   useEffect(() => {
+    setNewsData(context);
     setApSpecial(newsData?.main_ap_special[0]);
     setTnSpecial(newsData?.main_tn_special[0]);
-  }, []);
+  }, [newsData, context]);
 
   return (
     <div>
@@ -21,7 +25,10 @@ export default function VerTabs() {
               <img src={apSpecial?.img_url} width="100%" className="" alt="" />
               <h4 className="pt-3">{apSpecial?.headline_subject}</h4>
               <div className="text-end">
-              <a href="#" className="knowMoreBtn">ఇంకా </a>
+              <Link
+                    to={`/news/${apSpecial?.category}`}
+                    className="knowMoreBtn"
+                  >ఇంకా..</Link>
               </div>
             </div>
           </div>
@@ -32,7 +39,10 @@ export default function VerTabs() {
               <img src={tnSpecial?.img_url} width="100%" className="" alt="" />
               <h4 className="pt-3">{tnSpecial?.headline_subject}</h4>
               <div className="text-end">
-              <a href="#" className="">ఇంకా </a>
+              <Link
+                    to={`/news/${apSpecial?.category}`}
+                    className="knowMoreBtn"
+                  >ఇంకా..</Link>
               </div>
             </div>
           </div>

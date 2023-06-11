@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Col, Container, Row, Tab, Tabs } from "react-bootstrap";
 import { Swiper } from 'swiper/react';
 import "swiper/css";
@@ -7,13 +7,15 @@ import "swiper/css/pagination";
 import { FreeMode, Pagination } from "swiper";
 import { SwiperSlide } from 'swiper/react';
 import { Link } from "react-router-dom";
-import newsData from "../../../assets/data";
+import MyContext from "../../../assets/MyContext";
+
 var screen = Screen;
 
 function HomeTrending() {
   const [bannerLists, setBannerLists] = useState([]);
   const [screenWidth, setScreenWidth] = useState(2)
-
+  const context = useContext(MyContext);
+  const [newsData, setNewsData] = useState(context);
     // const handleSelect = (selectedIndex, e) => {
     //   setIndex(selectedIndex);
     // };
@@ -23,42 +25,38 @@ function HomeTrending() {
       setScreenWidth(1);
     }
   }
-  useEffect(() => {     
+  useEffect(() => {    
+    setNewsData(context);
       setBannerLists(newsData['trending']);
-    }, []);
+    }, [newsData, context]);
 
     return (
       <Container fluid className="mb-160x HomeTredSec" onResize={() => screenResize()}>
         <Row className="my-3">
+          {newsData?.cartoon_tabs?.length && (
           <Col md={3} className="p-3 sec-cartoon mb-30x">
             <Tabs
-              defaultActiveKey="home"
+              defaultActiveKey="one"
               id="justify-tab-example"
               className="mb-3"
               justify
             >
-              <Tab eventKey="home" title="నేటి కార్టూన్">
-                <img
-                  src={
-                    "https://www.sakshi.com/sites/default/files/styles/storypage_main/public/article_images/2022/01/28/Cot.jpg?itok=hEvlmGhO"
-                  }
-                  alt={"cartoon"}
-                  width="100%"
-                  height={"400px"}
-                />
-              </Tab>
-              <Tab eventKey="profile" title="మరిన్ని చుడండి">
-                <img
-                  src={
-                    "http://3.bp.blogspot.com/-07bdI0pQVfQ/UDXeFUcVLWI/AAAAAAAADc0/0FvF-1W4euc/s640/23-8cart2.jpg"
-                  }
-                  alt={"cartoon"}
-                  width="100%"
-                  height={"400px"}
-                />
-              </Tab>
+              {
+                newsData?.cartoon_tabs?.map(item => (
+                  <Tab key={item.tab_key} eventKey={item.tab_key} title={item.tab_name}>
+                    <img
+                      src={item.img_url}
+                      alt={"cartoon"}
+                      width="100%"
+                      height={"400px"}
+                      />
+                  </Tab>
+                    
+                ))
+              }
             </Tabs>
           </Col>
+          ) }
           <Col md={9} className="sec-trending mb-160x">
             <div className="py-5 px-3 sec-trending-content">
               <h2 className="text-center p-2">ట్రెండింగ్ అప్‌డేట్‌లు</h2>

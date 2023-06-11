@@ -158,3 +158,19 @@ box-shadow: none !important;
 .align-right {
   text-align: right;
 }
+
+.not-found {
+  height: 26vh;
+}
+
+.cl-blue {
+  color: $color-darkblue;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}

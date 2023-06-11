@@ -7,18 +7,27 @@ import SubjectForm from '../subject-form/SubjectForm';
 import HandleFileUpload from "./HandleFileUpload";
 // import TableWithDragAndDrop from '../sort-data/TableWithDragAndDrop';
 import DatePicker from 'react-datepicker';
+import slug  from 'slug';
+import { v4 as uuidv4 } from 'uuid';
+
 
 function CreateFrom({onSubmit, newsData}) {
   // Form fields Start
   const [title, setTitle] = useState("title onw");
+  const [id, setId] = useState(null);
+  const [slugGen, setSlugGen] = useState("");
   const [headLine, setHeadLine] = useState("head line one");
   const [subHeadline, setSubHeadline] = useState("sub head line one");
-  const [category, setCategory] = useState("sports");
+  const [category, setCategory] = useState("political");
   const [imgDesc, setImgDesc] = useState("img desc");
   const [reportedBy, setReportedBy] = useState("reporter one");
   const [isPublic, setIsPublic] = useState('0');
   const [publishDate, setPublishDate] = useState(new Date());
   const [tags, setTags] = useState([]);
+  const [thumbnails, setThumbnails] = useState({
+      filepc: "",
+      filetab: ""
+    });
   const options = [
     {
       label: "Latest",
@@ -56,7 +65,12 @@ function CreateFrom({onSubmit, newsData}) {
   const [subjectIndex, setSubjectIndex] = useState(null);
   const [btnName, setBtnName] = useState();
 
-  const handleTitleChange = (event) =>  setTitle(event.target.value);
+  const handleTitleChange = (event) =>  {
+    setTitle(event.target.value);
+    const uniqueId = uuidv4();
+    setId(uniqueId)
+    setSlugGen(slug(`${title}-${id}`));
+  }
   const handleImgDescChange = (event) => setImgDesc(event.target.value);
   const handleReportedByChange = (event) => setReportedBy(event.target.value);
   const handleHeadLineChange = (event) => setHeadLine(event.target.value);
@@ -92,6 +106,14 @@ function CreateFrom({onSubmit, newsData}) {
         setSubjectObj(null);
   }
 
+  const handleFileUploadLocation = (type, url) => {
+    const images = {
+      ...thumbnails
+    };
+    images[type] = url;
+    setThumbnails(images);
+  }
+
   const addToDescriptionList = (data) => {
       if (subjectIndex && subjectIndex >= 0) {
         const newList = subjectList;
@@ -115,6 +137,8 @@ function CreateFrom({onSubmit, newsData}) {
     event.preventDefault();
     // code to handle form submission
     const data = {
+      id,
+      slug: slugGen,
       title,
       head_line: headLine,
       sub_head_line: subHeadline,
@@ -125,7 +149,8 @@ function CreateFrom({onSubmit, newsData}) {
       reported_by: reportedBy,
       address,
       tags,
-      subject_list: subjectList 
+      subject_list: subjectList,
+      thumbnails
     };
 
     onSubmit(data);
@@ -143,6 +168,8 @@ function CreateFrom({onSubmit, newsData}) {
   
   useEffect(() => {
     if (newsData) {
+      setId(newsData?.id);
+      setSlugGen(newsData?.slug);
       setTitle(newsData?.title);
       setHeadLine(newsData?.head_line);
       setSubHeadline(newsData?.sub_head_line);
@@ -152,7 +179,9 @@ function CreateFrom({onSubmit, newsData}) {
       setIsPublic(newsData?.is_public);
       setPublishDate(newsData?.publish_date);
       setTags(newsData?.tags);
+      setThumbnails(newsData?.thumbnails);
       setAddress(newsData?.address);
+      setSubjectList(newsData?.subject_list);
     }
   }, [newsData]);
 
@@ -184,11 +213,16 @@ function CreateFrom({onSubmit, newsData}) {
               value={category}
               onChange={handleCategoryChange}
             >
-              <option value="sports">Sports</option>
-              <option value="news">News</option>
-              <option value="business">Business</option>
-              <option value="cultural">Cultural</option>
-              <option value="health">Health</option>
+              <option value="political">రాజకీయం</option>
+              <option value="ap">ఆంధ్రప్రదేశ్</option>
+              <option value="tn">తెలంగాణ</option>
+              <option value="international">జాతీయం</option>
+              <option value="sports">క్రీడలు</option>
+              <option value="entertainment">చిత్ర</option>
+              <option value="education">విద్య</option>
+              <option value="business">బిజినెస్</option>
+              <option value="trending">ట్రెండింగ్</option>
+              <option value="cartoon_tabs">Cartoon tab</option>
             </Form.Control>
           </Form.Group>
         </Col>
@@ -369,7 +403,7 @@ function CreateFrom({onSubmit, newsData}) {
       {/* Image Upload Component */}
       <Row className="mb-3">
         <Col>
-          <HandleFileUpload />
+          <HandleFileUpload onImageLoad={handleFileUploadLocation} images={thumbnails}/>
         </Col>
       </Row>
       {/* SUbject Adding starts hear */}

@@ -8,76 +8,54 @@ import ReactDragListView from 'react-drag-listview';
 
 class DragableTable extends Component {
     constructor(props) {
-        super(props);
 
+        super(props);
         this.state = {
-            data: [
-                {
-                    key: "1",
-                    name: "Boran",
-                    gender: "male",
-                    age: "12",
-                    address: "New York"
-                },
-                {
-                    key: "2",
-                    name: "JayChou",
-                    gender: "male",
-                    age: "38",
-                    address: "TaiWan"
-                },
-                {
-                    key: "3",
-                    name: "Lee",
-                    gender: "female",
-                    age: "22",
-                    address: "BeiJing"
-                },
-                {
-                    key: "4",
-                    name: "ChouTan",
-                    gender: "male",
-                    age: "31",
-                    address: "HangZhou"
-                },
-                {
-                    key: "5",
-                    name: "AiTing",
-                    gender: "female",
-                    age: "22",
-                    address: "Xi’An"
-                }
-            ]
+            data: []
         };
+
+        console.log(this.state.data , ' ::: State ::::: data')
         this.columns = [
             {
                 title: "Key",
-                dataIndex: "key"
-            },
-            {
-                title: "News Title",
-                dataIndex: "name"
-            },
-            {
-                title: "Status",
-                dataIndex: "gender"
-            },
-            {
-                title: "Published",
-                dataIndex: "age"
-            },
-            {
-                title: "Date",
-                dataIndex: "address"
-            },
-            {
-                title: "Actions",
-                dataIndex: "address",
+                dataIndex: "slug",
                 render: (text, record, index) => {
                     return (
                         <>
-                            <a className="drag-handle" href="#" onClick={this.onEdit(record)}>Edit</a>
-                            <a className="drag-handle" href="#" onClick={this.onDelete(record)}>Delete</a>
+                            {index + 1}
+                        </>
+                    )
+                }
+            },
+            {
+                title: "Title",
+                dataIndex: "title",
+                key: "title"
+            },
+            {
+                title: "Status",
+                dataIndex: "is_public",
+                render: (text, record, index) => {
+                    return (
+                        <>
+                        {record?.is_public === '1' ? 'Yes' : 'No'}
+                        </>
+                    )
+                }
+            },
+            {
+                title: "Publish Date",
+                dataIndex: "head_line",
+                key: "head_line"
+            },
+            {
+                title: "Actions",
+                dataIndex: "category",
+                render: (text, record, index) => {
+                    return (
+                        <>
+                            {/* <a className="drag-handle pr-2" href="#" onClick={this.onEdit.bind(record, index)}>Edit</a>
+                            <a className="drag-handle" href="#" onClick={this.onDelete.bind(record, index)}>Delete</a> */}
                         </>
                     )
                 }
@@ -100,23 +78,29 @@ class DragableTable extends Component {
                 that.setState({
                     data
                 });
+                this.props.onDrag(data, this.props.category)
             },
             handleSelector: "a",
         };
     }
 
-    onEdit(data) {
+    onEdit(index) {
         // Edit code here
+        console.log(this.state, 'state in cat');
+            const data = [...this.state.data];
+            this.props.onEdit(data, data[index]);
     }
 
-    onDelete(data) {
+    onDelete(index) {
         // code goes here
+        const data = [...this.state.data];
+            this.props.onDelete(data, data[index]);
     }
+
 
     render() {
         return (
             <div style={{ margin: 20 }}>
-                <h2>Table row with dragging</h2>
                 <ReactDragListView {...this.dragProps}>
                     <Table
                         columns={this.columns}
