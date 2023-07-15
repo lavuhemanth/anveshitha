@@ -187,6 +187,9 @@ This command will uninstall the selected version of Node.js.
 
 If the version you would like to remove is the current active version, you first need to deactivate nvm to enable your changes:
 
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04
+TOgenerate SSl
+
 nvm deactivate
 
 ======================================================
