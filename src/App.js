@@ -23,6 +23,7 @@ function App() {
             {/* Not in use from */}
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/admin-board" element={<DashBoard />} />
+            <Route exact path="/admin-board/:category" element={<GenerateNews />} />
             <Route exact path="/create-news" element={<GenerateNews />} />
             <Route exact path="/update/:id" element={<GenerateNews />} />
             {/* Not in use end*/}

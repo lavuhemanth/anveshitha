@@ -78,28 +78,28 @@ function Header() {
                       <FontAwesomeIcon icon={faHouse} size="lg" />
                       <span className="pl-2">Home</span>
                     </Nav.Link>
-                    <Nav.Link href={`/news/homeContent`} className="cl link">
+                    <Nav.Link href={`/news/politics`} className="cl link">
                       రాజకీయం
                     </Nav.Link>
                     <Nav.Link href={`/news/ap`} className="cl link">
                       ఆంధ్రప్రదేశ్
                     </Nav.Link>
-                    <Nav.Link href={`/news/tn`} className="cl link">
+                    <Nav.Link href={`/news/telangana`} className="cl link">
                       తెలంగాణ
                     </Nav.Link>
-                    <Nav.Link href={`/news/homeContent`} className="cl link">
+                    <Nav.Link href={`/news/international`} className="cl link">
                       జాతీయం
                     </Nav.Link>
-                    <Nav.Link href={`/news/sprt`} className="cl link">
+                    <Nav.Link href={`/news/sports`} className="cl link">
                       క్రీడలు
                     </Nav.Link>
-                    <Nav.Link href={`/news/ent`} className="cl link">
+                    <Nav.Link href={`/news/entertainment`} className="cl link">
                       చిత్ర
                     </Nav.Link>
-                    <Nav.Link href={`/news/trending`} className="cl link">
+                    <Nav.Link href={`/news/education`} className="cl link">
                       విద్య
                     </Nav.Link>
-                    <Nav.Link href={`/news/trending`} className="cl link">
+                    <Nav.Link href={`/news/business`} className="cl link">
                       బిజినెస్
                     </Nav.Link>
                     <Nav.Link href={`/news/trending`} className="cl link">
@@ -111,38 +111,34 @@ function Header() {
             </Container>)}
             {isAdmin && (
               <Container  className="cl menubar">
-                 
                     <Nav.Link href={`/admin-board?admin_slug=admin`} className="cl link">
-                      Generate News
-                    </Nav.Link>
-                    <Nav.Link href={`/home-management?admin_slug=admin`} className="cl link">
                       Manage Home
                     </Nav.Link>
-                    <Nav.Link href={`/news/homeContent`} className="cl link">
+                    <Nav.Link href={`/admin-board/politics?admin_slug=admin`} className="cl link">
                       రాజకీయం
                     </Nav.Link>
-                    <Nav.Link href={`/news/ap`} className="cl link">
+                    <Nav.Link href={`/admin-board/ap?admin_slug=admin`} className="cl link">
                       ఆంధ్రప్రదేశ్
                     </Nav.Link>
-                    <Nav.Link href={`/news/tn`} className="cl link">
+                    <Nav.Link href={`/admin-board/telangana?admin_slug=admin`} className="cl link">
                       తెలంగాణ
                     </Nav.Link>
-                    <Nav.Link href={`/news/homeContent`} className="cl link">
+                    <Nav.Link href={`/admin-board/international?admin_slug=admin`} className="cl link">
                       జాతీయం
                     </Nav.Link>
-                    <Nav.Link href={`/news/sprt`} className="cl link">
+                    <Nav.Link href={`/admin-board/sports?admin_slug=admin`} className="cl link">
                       క్రీడలు
                     </Nav.Link>
-                    <Nav.Link href={`/news/ent`} className="cl link">
+                    <Nav.Link href={`/admin-board/entertainment?admin_slug=admin`} className="cl link">
                       చిత్ర
                     </Nav.Link>
-                    <Nav.Link href={`/news/trending`} className="cl link">
+                    <Nav.Link href={`/admin-board/education?admin_slug=admin`} className="cl link">
                       విద్య
                     </Nav.Link>
-                    <Nav.Link href={`/news/trending`} className="cl link">
+                    <Nav.Link href={`/admin-board/business?admin_slug=admin`} className="cl link">
                       బిజినెస్
                     </Nav.Link>
-                    <Nav.Link href={`/news/trending`} className="cl link">
+                    <Nav.Link href={`/admin-board/trending?admin_slug=admin`} className="cl link">
                       ట్రెండింగ్
                     </Nav.Link>
               </Container>

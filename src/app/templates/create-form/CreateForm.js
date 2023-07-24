@@ -8,16 +8,18 @@ import HandleFileUpload from "./HandleFileUpload";
 // import TableWithDragAndDrop from '../sort-data/TableWithDragAndDrop';
 import DatePicker from 'react-datepicker';
 
-function CreateFrom({onSubmit, newsData}) {
+function CreateFrom({onSubmit, newsData, categoryItm}) {
+  console.log('newsData :: ', newsData);
   // Form fields Start
   const [title, setTitle] = useState("title onw");
   const [headLine, setHeadLine] = useState("head line one");
   const [subHeadline, setSubHeadline] = useState("sub head line one");
-  const [category, setCategory] = useState("sports");
+  const [category_id, setCategoryId] = useState(categoryItm._id);
   const [imgDesc, setImgDesc] = useState("img desc");
-  const [reportedBy, setReportedBy] = useState("reporter one");
+  const [reported_by, setReportedId] = useState("reporter one");
   const [isPublic, setIsPublic] = useState('0');
-  const [publishDate, setPublishDate] = useState(new Date());
+  const [publish_date, setPublishDate] = useState(new Date().toLocaleDateString().toString());
+  const [selectedDate, setSelecteDate] = useState(new Date());
   const [tags, setTags] = useState([]);
   const options = [
     {
@@ -58,12 +60,12 @@ function CreateFrom({onSubmit, newsData}) {
 
   const handleTitleChange = (event) =>  setTitle(event.target.value);
   const handleImgDescChange = (event) => setImgDesc(event.target.value);
-  const handleReportedByChange = (event) => setReportedBy(event.target.value);
+  const handleReportedIdChange = (event) => setReportedId(event.target.value);
   const handleHeadLineChange = (event) => setHeadLine(event.target.value);
   const handleSubHeadLineChange = (event) => setSubHeadline(event.target.value);
-  const handleCategoryChange = (event) => setCategory(event.target.value);
   const handlePublicPrivateChange = (event) => setIsPublic(event.target.value === '0' ? '0' : '1');
-  const handleDatePicker = (date) => setPublishDate(date);
+  const handleDatePicker = (date) =>{ setPublishDate(new Date(date).toString()); setSelecteDate(date)};
+  
 
   const handleAddressCityChange = (event) => {  
     setAddress({ ...address, city: event.target.value });
@@ -118,16 +120,16 @@ function CreateFrom({onSubmit, newsData}) {
       title,
       head_line: headLine,
       sub_head_line: subHeadline,
-      category,
+      category_id,
       img_desc: imgDesc,
-      publish_date: publishDate,
+      publish_date: new Date(selectedDate).toISOString(),
       is_public: isPublic,
-      reported_by: reportedBy,
+      reported_by: "64aaec55d66dd9528cf982df",
       address,
       tags,
       subject_list: subjectList 
     };
-
+    console.log('data :: ', data);
     onSubmit(data);
   };
 
@@ -140,17 +142,17 @@ function CreateFrom({onSubmit, newsData}) {
      setTags(tags.filter((val) => val !== value));
    }
  };
-  
+
   useEffect(() => {
     if (newsData) {
       setTitle(newsData?.title);
       setHeadLine(newsData?.head_line);
       setSubHeadline(newsData?.sub_head_line);
-      setCategory(newsData?.category);
+      setCategoryId(categoryItm?._id);
       setImgDesc(newsData?.img_desc);
-      setReportedBy(newsData?.reported_by);
+      setReportedId("64aaec55d66dd9528cf982df");
       setIsPublic(newsData?.is_public);
-      setPublishDate(newsData?.publish_date);
+      setPublishDate(new Date(newsData?.publish_date).toLocaleDateString().toString());
       setTags(newsData?.tags);
       setAddress(newsData?.address);
     }
@@ -179,17 +181,11 @@ function CreateFrom({onSubmit, newsData}) {
               <b>Category</b>
             </Form.Label>
             <Form.Control
+              disabled
               size="lg"
-              as="select"
-              value={category}
-              onChange={handleCategoryChange}
-            >
-              <option value="sports">Sports</option>
-              <option value="news">News</option>
-              <option value="business">Business</option>
-              <option value="cultural">Cultural</option>
-              <option value="health">Health</option>
-            </Form.Control>
+              type="text"
+              value={categoryItm.name}
+            />
           </Form.Group>
         </Col>
       </Row>
@@ -272,8 +268,8 @@ function CreateFrom({onSubmit, newsData}) {
             <Form.Control
               size="md"
               type="text"
-              value={reportedBy}
-              onChange={handleReportedByChange}
+              value={reported_by}
+              onChange={handleReportedIdChange}
               placeholder="Reporter name"
             />
           </Form.Group>
@@ -331,16 +327,18 @@ function CreateFrom({onSubmit, newsData}) {
       <Row className="mb-3">
         <Col>
           <Form.Label>
-            <b>Publish Date</b> - <span>MM/DD/YYYY</span>
-          </Form.Label>
-          <DatePicker
-            showIcon
-            id="example-datepicker"
-            selected={publishDate}
-            minDate={new Date()}
-            onChange={handleDatePicker}
-            className="w-100 p-2 input-border"
-          />
+            <b>Publish Date</b> - <span>MM/DD/YYYY {publish_date}</span>
+          </Form.Label>          
+          <div>
+     <DatePicker
+     showIcon
+     selected={selectedDate}
+     className=""
+      value={selectedDate}
+      minDate={new Date()}
+       onChange={handleDatePicker}
+     />
+     </div>
         </Col>
         <Col>
           <Form.Group controlId="formMultiSelect">

@@ -1,11 +1,9 @@
 import React from 'react';
-import GenerateNews from './GenerateNews';
-import HeadLinesTable from '../templates/HeadLinesTable';
 
 
 function DashBoard() {
     return (<>
-        <GenerateNews />
+        {/* <GenerateNews /> */}
         {/* <HeadLinesTable /> */}
 </>)
 };
