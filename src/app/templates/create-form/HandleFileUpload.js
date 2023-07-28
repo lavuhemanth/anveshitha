@@ -23,40 +23,76 @@ function HandleFileUpload() {
 
 
 
+    const FILE_CHUNK_SIZE = 10_000_000
+
+    const uploadParts = async (file, urls) => {
+      const promises = []
+      for (let index = 0; index < urls.length; index++) {
+        const start = index * FILE_CHUNK_SIZE
+        const end = (index + 1) * FILE_CHUNK_SIZE
+        const blob = index < urls.length
+          ? file.slice(start, end)
+          : file.slice(start)
+    
+        promises.push({url: urls[index], blob});
+      }
+
+      console.log(promises);
+      await Promise.all(fetch('http://localhost:9091/api/v1/fileProcess/fetchFileProcess?fileName=4k_24fps.mp4', {
+        
+      }))
+    
+      // const resParts = await Promise.all(promises)
+    
+      // return resParts.map((part, index) => ({
+      //   ETag: (part).headers.etag,
+      //   PartNumber: index + 1
+      // }))
+    }
     const handleFileSelect = (event) => {
     setShow(true);
     const file = event.target.files[0];
-    if (file && file.type.substr(0, 5) === "image") {
-      const img = new Image();
-      img.onload = function () {
-        const height = img.height;
-        if (height < 720) {
-          setErrorMessage("Image height should be at least 720 pixels");
-        } else if (height > 1080) {
-          setErrorMessage("Image height should be no more than 1080 pixels");
-        } else if (file.size > 5 * 1024 * 1024) {
-          setErrorMessage("File size should be less than 5MB");
-        } else {
-          setErrorMessage("");
-          Resizer.imageFileResizer(
-            file,
-            1280, // max width
-            720, // max height
-            "JPEG", // output format
-            70, // quality
-            0, // rotation
-            (uri) => {
-              setSelectedFile({ file, uri });
-            },
-            "base64", // output type
-            200 // max file size in bytes
-          );
-        }
-      };
-      img.src = URL.createObjectURL(file);
-    } else {
-      setErrorMessage("Please select a valid image file");
-    }
+    fetch('http://localhost:9091/api/v1/fileProcess/fetchFileProcess?fileName=4k_24fps.mp4')
+    .then(response => {
+      return response.json();
+    })
+    .then(response => {
+      if (response.statusCode === 200) {
+        const urls = response.response;
+        uploadParts(file, urls);
+      }
+    })
+    // if (file && file.type.substr(0, 5) === "image") {
+    //   const img = new Image();
+    //   img.onload = function () {
+    //     const height = img.height;
+    //     if (height < 720) {
+    //       setErrorMessage("Image height should be at least 720 pixels");
+    //     } else if (height > 1080) {
+    //       setErrorMessage("Image height should be no more than 1080 pixels");
+    //     } else if (file.size > 5 * 1024 * 1024) {
+    //       setErrorMessage("File size should be less than 5MB");
+    //     } else {
+    //       setErrorMessage("");
+    //       Resizer.imageFileResizer(
+    //         file,
+    //         1280, // max width
+    //         720, // max height
+    //         "JPEG", // output format
+    //         70, // quality
+    //         0, // rotation
+    //         (uri) => {
+    //           setSelectedFile({ file, uri });
+    //         },
+    //         "base64", // output type
+    //         200 // max file size in bytes
+    //       );
+    //     }
+    //   };
+    //   img.src = URL.createObjectURL(file);
+    // } else {
+    //   setErrorMessage("Please select a valid image file");
+    // }
     };
 
     const handleCrop = (type, data) => {
@@ -79,7 +115,7 @@ function HandleFileUpload() {
             <Form.Control
             className="p-5 cl-gray"
             type="file"
-            accept="image/*"
+            accept="video/*"
             onChange={handleFileSelect}
             />
             {errorMessage && (
