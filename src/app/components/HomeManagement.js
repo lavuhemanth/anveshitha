@@ -6,6 +6,7 @@ import RightOffCanvas from "../templates/RIghtOffCanvas";
 import { IS_BOOLEAN } from "../../mapper";
 import InfiniteList from "../templates/multi-select-list/InfiniteList";
 import SearchNews from "../templates/search-news/SearchNews";
+import SearchComponent from "./SearchComponent";
 
 
 
@@ -13,6 +14,7 @@ import SearchNews from "../templates/search-news/SearchNews";
 function HomeManagement() {
 
     const [showRightNav, setShowRightNav] = useState(IS_BOOLEAN['FALSE']);
+    const [searchData, setSearchData] = useState([]);
 
     const onCloseRightNav = () => {
         // code goes here
@@ -37,17 +39,8 @@ function HomeManagement() {
             </Row>
             <DragableTable/>
             <Container>
-        <RightOffCanvas
-          handleClose={onCloseRightNav}
-          show={showRightNav}
-          title={`News List`}
-          className="w-50"
-        >
-        
-            <SearchNews/>
-            <InfiniteList/>
-            
-        </RightOffCanvas>
+
+            <SearchComponent onCloseRightNav={onCloseRightNav} showRightNav={showRightNav}></SearchComponent>
       </Container>
         
         </Container>

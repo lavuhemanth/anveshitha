@@ -6,31 +6,30 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
 
-class InfiniteList extends Component {
-  state = {
-    data: [],
-    loading: false,
-    hasMore: true,
-  };
+function InfiniteList ({serchPeram }) {
 
-  componentDidMount() {
-    this.fetchData(res => {
-      this.setState({
-        data: res.results,
-      });
-    });
-  }
+  const [loading, setLoading] = React.useState(false);
+  const [data, updateData] = React.useState([]);
+  const [hasMore, setHasMore] = React.useState(true);
+
 
   fetchData = callback => {
-    reqwest({
-      url: fakeDataUrl,
-      type: 'json',
-      method: 'get',
-      contentType: 'application/json',
-      success: res => {
-        callback(res);
-      },
-    });
+    let path = `news/search?category_slug=${category ? category : categoryList['0'].value }&publish_date=${formatData}`;
+    if (path && title) {
+      path += `&title=${title}`;
+    }
+    await getApiCall(path)
+        .then(data => {
+          if (data.statusCode === 200) {
+            console.log('date :: ', data);
+            const searchData = data?.response?.data;
+            updateData(searchData);
+          }
+        })
+        .catch(error => {
+          alert('Error fetching category data');
+          console.log('date :: ', error);
+        })
   };
 
   handleInfiniteOnLoad = () => {

@@ -111,7 +111,7 @@ function Header() {
             </Container>)}
             {isAdmin && (
               <Container  className="cl menubar">
-                    <Nav.Link href={`/admin-board?admin_slug=admin`} className="cl link">
+                    <Nav.Link href={`/admin-board/home-management?admin_slug=admin`} className="cl link">
                       Manage Home
                     </Nav.Link>
                     <Nav.Link href={`/admin-board/politics?admin_slug=admin`} className="cl link">

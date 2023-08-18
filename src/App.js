@@ -33,7 +33,7 @@ function App() {
               element={<HomeContent />}
             />
             <Route exact path="/news/:category" element={<StateNews />} />
-            <Route exact path='/home-management' element={<HomeManagement/>}/>
+            <Route exact path='/admin-board/home-management' element={<HomeManagement/>}/>
           </Routes>
         </Router>
       </Container>
